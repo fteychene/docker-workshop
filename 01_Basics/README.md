@@ -127,17 +127,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 43de1ad97a06        emilevauge/whoami   "/whoamI"           16 seconds ago      Up 15 seconds       0.0.0.0:8001->80/tcp   gracious_sammet
 466f026965fb        emilevauge/whoami   "/whoamI"           27 seconds ago      Up 26 seconds       0.0.0.0:8000->80/tcp   elastic_roentgen
 ```
-
-Stop the containers and go to the [excercice](#Exercise)
-
-## Exercise
-Docker image to use :
- * [emilevauge/whoami](https://hub.docker.com/r/emilevauge/whoami/)
- * [postgres](https://hub.docker.com/_/postgres/)
-
-Start a container of the `emilevauge/whoami` image with the port *80* of the container exposed as port *8000* of your host.  
-Start a `postgres` container exposing the port *5432* as *5432* on your host and with a root password set to *password01*
-
+Stop the containers and go to the [exercise section](#Exercise)
 
 ## Recap
  * `pull` : Download a docker image from a registry
@@ -148,7 +138,15 @@ Start a `postgres` container exposing the port *5432* as *5432* on your host and
  * `stop`: Stop a existing running container
  * `kill`: Kill a existing running container
 
-References :
+## Exercise
+Docker image to use :
+ * [nginx](https://hub.docker.com/_/nginx/)
+ * [postgres](https://hub.docker.com/_/postgres/)
+
+Start a container of the `nginx` image with the port *80* of the container exposed as port *8000* of your host.  
+Start a `postgres` container exposing the port *5432* as *5432* on your host and with a root password set to *password01*
+
+## References :
  * [docker CLI reference](https://docs.docker.com/engine/reference/commandline/docker/)
  * [docker run reference](https://docs.docker.com/engine/reference/run/)
  * [docker-engine documentation](https://docs.docker.com/engine/)
