@@ -129,6 +129,33 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 ```
 Stop the containers and go to the [exercise section](#Exercise)
 
+## Clean the containers
+As you can see when running a `docker ps -a`, when a container stop or exit normally, it's not destroyed.  
+It allow us to relaunch this container but while it's not running it still keep some space on your host. To delete these stopped containers you have to run `docker rm <container id>`.
+```
+$ docker stop gracious_sammet
+$ docker rm gracious_sammet
+```
+Since Docker 1.13 there is also a way to clean the system of all the stopped containers by running a new command.
+```
+$ docker container prune
+WARNING! This will remove all stopped containers.
+Are you sure you want to continue? [y/N] y
+Deleted Containers:
+6fdb8fc3091a2728d9cdccdb69799a28048a4fc321a9f6544707a970b43ad85a
+3eeb1d78da327c301c9a609db5f06a094ef26fcf961b296e2bc1f31e1702b149
+cc8c94621bdfc91ef1fc78af224ad14aeec7b49ebe8ec32b41582c252bc6c240
+f75e0c9bced9ee06b94dcd43caa68254617c6b9901dd5d08811086c28c41ec1e
+e0bc0fd3a99cf95ade86f8dd8180f82ee118e7223bf83a1373195cc71da41954
+fba72e6a770c5b12585eb8dbde673e1aa88446915f3a713dff58d9a7bc8f432d
+d15e832bf5eacf07b9a8f066eadc973f123f3ad5b204fb40f422b5a8f222ca4d
+adbf8c20806aaa2227071dec52e7553f1d58109fdcd4c347ba20ddf21e80cb60
+41d29fd8bb1b42740239c1396581d97e7228121e77613d4b16d8c28834ea3611
+6661a164a049742d339d4598bc74d45bacf65d0e758dcf2ee49f2291485d4e37
+
+Total reclaimed space: 1.351 kB
+```
+
 ## Recap
  * `pull` : Download a docker image from a registry
  * `run`: Start a new container based on a image
@@ -137,6 +164,7 @@ Stop the containers and go to the [exercise section](#Exercise)
  * `start`: Start a existing container
  * `stop`: Stop a existing running container
  * `kill`: Kill a existing running container
+ * `rm` : Delete a container from the system
 
 ## Exercise
 Docker image to use :
