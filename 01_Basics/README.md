@@ -108,14 +108,6 @@ $ docker stop <container with sh command name|zen_pike here>
 ```
 We could also have `kill` it with the command `docker kill`. The kill is a more radical command that kill the process in the container, it should only be used when a stop isn't effective.
 
-## Recap
- * `pull` : Download a docker image from a registry
- * `run`: Start a new container based on a image
- * `ps`: Show containers
- * `images`: List images available on the system
- * `start`: Start a existing container
- * `stop`: Stop a existing running container
- * `kill`: Kill a existing running container
 
 ## Exercise
 Docker image to use :
@@ -126,7 +118,22 @@ Start a container of the `emilevauge/whoami` image with the port *80* of the con
 Start a `postgres` container exposing the port *5432* as *5432* on your host and with a root password set to *password01*
 
 
+## Recap
+ * `pull` : Download a docker image from a registry
+ * `run`: Start a new container based on a image
+ * `ps`: Show containers
+ * `images`: List images available on the system
+ * `start`: Start a existing container
+ * `stop`: Stop a existing running container
+ * `kill`: Kill a existing running container
+
+References :
+ * [docker CLI reference](https://docs.docker.com/engine/reference/commandline/docker/)
+ * [docker run reference](https://docs.docker.com/engine/reference/run/)
+ * [docker-engine documentation](https://docs.docker.com/engine/)
+
+ ___
 
 Previous | Next
 :------- | ---:
-← [Introduction](..) | [Build](../02_Build) →
+← [Introduction](../../..) | [Build](../02_Build/) →
