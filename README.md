@@ -20,5 +20,5 @@ At the end of this workshop you should be able to :
 
 
  Previous | Next
- :------- | ---:
+ :---: | :---:
  ← | [Basics](./01_Basics) →

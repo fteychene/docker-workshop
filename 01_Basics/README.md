@@ -108,6 +108,27 @@ $ docker stop <container with sh command name|zen_pike here>
 ```
 We could also have `kill` it with the command `docker kill`. The kill is a more radical command that kill the process in the container, it should only be used when a stop isn't effective.
 
+### Multiple container of image
+Now we have launched some containers, it's time to run multiple containers of the same image.
+```
+$ docker run -d -p 8000:80 emilevauge/whoami
+466f026965fbba51f1fb5232a1e1cd762dbf4a7371f636439528a89273b93266
+$ docker run -d -p 8001:80 emilevauge/whoami
+43de1ad97a06a059c0292236309fea7f613527a48d0564422a473b6d71977644
+```
+
+Try to acces to the apps to see the differents informations for each container.
+![display_whoami](./whoami.gif)
+
+We can also check the running containers with a `docker ps`
+```
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                  NAMES
+43de1ad97a06        emilevauge/whoami   "/whoamI"           16 seconds ago      Up 15 seconds       0.0.0.0:8001->80/tcp   gracious_sammet
+466f026965fb        emilevauge/whoami   "/whoamI"           27 seconds ago      Up 26 seconds       0.0.0.0:8000->80/tcp   elastic_roentgen
+```
+
+Stop the containers and go to the [excercice](#Exercise)
 
 ## Exercise
 Docker image to use :
@@ -132,8 +153,9 @@ References :
  * [docker run reference](https://docs.docker.com/engine/reference/run/)
  * [docker-engine documentation](https://docs.docker.com/engine/)
 
+
  ___
 
 Previous | Next
-:------- | ---:
+:---: | :---:
 ← [Introduction](../../..) | [Build](../02_Build/) →
