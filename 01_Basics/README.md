@@ -111,9 +111,9 @@ We could also have `kill` it with the command `docker kill`. The kill is a more 
 ### Multiple container of image
 Now we have launched some containers, it's time to run multiple containers of the same image.
 ```
-$ docker run -d -p 8000:80 emilevauge/whoami
+$ docker run -d -p 8000:80 --name whoami1 emilevauge/whoami
 466f026965fbba51f1fb5232a1e1cd762dbf4a7371f636439528a89273b93266
-$ docker run -d -p 8001:80 emilevauge/whoami
+$ docker run -d -p 8001:80 --name whoami1 emilevauge/whoami
 43de1ad97a06a059c0292236309fea7f613527a48d0564422a473b6d71977644
 ```
 
@@ -124,8 +124,8 @@ We can also check the running containers with a `docker ps`
 ```
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                  NAMES
-43de1ad97a06        emilevauge/whoami   "/whoamI"           16 seconds ago      Up 15 seconds       0.0.0.0:8001->80/tcp   gracious_sammet
-466f026965fb        emilevauge/whoami   "/whoamI"           27 seconds ago      Up 26 seconds       0.0.0.0:8000->80/tcp   elastic_roentgen
+43de1ad97a06        emilevauge/whoami   "/whoamI"           16 seconds ago      Up 15 seconds       0.0.0.0:8001->80/tcp   whoami1
+466f026965fb        emilevauge/whoami   "/whoamI"           27 seconds ago      Up 26 seconds       0.0.0.0:8000->80/tcp   whoami2
 ```
 Stop the containers and go to the [exercise section](#Exercise)
 
@@ -133,8 +133,8 @@ Stop the containers and go to the [exercise section](#Exercise)
 As you can see when running a `docker ps -a`, when a container stop or exit normally, it's not destroyed.  
 It allow us to relaunch this container but while it's not running it still keep some space on your host. To delete these stopped containers you have to run `docker rm <container id>`.
 ```
-$ docker stop gracious_sammet
-$ docker rm gracious_sammet
+$ docker stop whoami1
+$ docker rm whoami1
 ```
 Since Docker 1.13 there is also a way to clean the system of all the stopped containers by running a new command.
 ```

@@ -188,4 +188,4 @@ ___
 
 Previous | Next
 :---: | :---:
-← [Basics](../01_Basics) |  →
+← [Basics](../01_Basics) | [Links](../03_Link/)  →
