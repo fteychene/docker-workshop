@@ -61,4 +61,4 @@ ___
 
 Previous | Next
 :---: | :---:
-← [Basics](../02_Build) |   →
+← [Build](../02_Build) | [Compose](../04_Compose)  →

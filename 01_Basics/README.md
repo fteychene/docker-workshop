@@ -109,7 +109,8 @@ $ docker stop <container with sh command name|zen_pike here>
 We could also have `kill` it with the command `docker kill`. The kill is a more radical command that kill the process in the container, it should only be used when a stop isn't effective.
 
 ### Multiple container of image
-Now we have launched some containers, it's time to run multiple containers of the same image.
+Now we have launched some containers, it's time to run multiple containers of the same image.  
+For the occasion we add an option of the `run` command to name the container
 ```
 $ docker run -d -p 8000:80 --name whoami1 emilevauge/whoami
 466f026965fbba51f1fb5232a1e1cd762dbf4a7371f636439528a89273b93266
