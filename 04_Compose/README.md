@@ -27,6 +27,25 @@ docker-compose up
 You shall see the execution of the two containers database and worpress and you can access to the installation by accessing `localhost:8000`.  
 ![execution_wordpress](./wordpress/compose.gif)
 
+After stopping the stack you can delete all the informations bu running `docker-compose down`
+
+### Ruby on rail with build when starting
+You can also define a `docker-compose.yml` file to define a service as a local folder to build when you start hte stack.  
+One example can be a ruby on rails stack with a databse and the application builded on the fly.
+
+ We define the following [docker-compose.yml](./rails/docker-compose.yml) to build a ruby on rail app and its database.
+```
+docker-compose up --build
+```
+This command will launch the stack and will build all the services defining a `build` configuration.  
+After launching the stack you can access to `localhost:3000` to see your ruby on rails app running.  
+![](./rails/result.png)
+
+After stopping the stack you can delete all the informations bu running `docker-compose down`
+
+## Excercice
+
+Reverse engineer the `wordpress` docker image to define a `docker-compose.yml` for the wordpress stack to integrate custom code from your repository when launching the stack.
 
 ## References :
  * [docker-compose.yml reference](https://docs.docker.com/compose/compose-file/)
