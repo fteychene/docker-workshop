@@ -114,7 +114,7 @@ For the occasion we add an option of the `run` command to name the container
 ```
 $ docker run -d -p 8000:80 --name whoami1 emilevauge/whoami
 466f026965fbba51f1fb5232a1e1cd762dbf4a7371f636439528a89273b93266
-$ docker run -d -p 8001:80 --name whoami1 emilevauge/whoami
+$ docker run -d -p 8001:80 --name whoami2 emilevauge/whoami
 43de1ad97a06a059c0292236309fea7f613527a48d0564422a473b6d71977644
 ```
 
