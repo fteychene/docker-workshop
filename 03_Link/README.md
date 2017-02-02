@@ -40,7 +40,7 @@ You can try this feature by running the same example with network.
 ```
 $ docker network create test_network
 $ docker run -d -e MYSQL_ROOT_PASSWORD=root --net=test_network --name database mysql
-$ docker run -it ---net=test_network mysql sh
+$ docker run -it --net=test_network mysql sh
 # mysql -h database -p
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 5

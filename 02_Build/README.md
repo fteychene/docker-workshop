@@ -162,8 +162,8 @@ $ docker tag local/staticwebsite localhost:5000/local/staticwebsite
 ```
 And now we just have to `push`.
 ```
-$ docker push localhost:5000/local/staticwebsit
-The push refers to a repository [localhost:5000/local/staticwebsit]
+$ docker push localhost:5000/local/staticwebsite
+The push refers to a repository [localhost:5000/local/staticwebsite]
 852275a9ae25: Pushed
 49dd0a971ced: Pushed
 8bc1567a538e: Pushed
