@@ -2,17 +2,18 @@
 
 ## Overview
 This section is dedicated to the basics of the docker-engine.  
-We will run some images, stop, restart containers and test some images available on [dockerhub](https://hub.docker.com/).
+We will run some images, stop, restart containers and test some images available on [Docker Hub](https://hub.docker.com/).
 
 ## Steps
 
 ### Let's pull some images
+
 To get started, let's run the following in our terminal:
 ```
 $ docker pull alpine
 ```
 
-The `pull` command fetches the alpine **image** from the **[dockerhub](https://hub.docker.com/) docker registry** and saves it in our system.
+The `pull` command fetches the alpine **image** from the **[Docker Hub](https://hub.docker.com/) docker registry** and saves it in our system.
 
 Use the `docker images` command to see a list of all images on your system.
 ```
@@ -21,10 +22,11 @@ REPOSITORY              TAG                 IMAGE ID            CREATED         
 alpine                  latest              c51f86c28340        4 weeks ago         1.109 MB
 hello-world             latest              690ed74de00f        5 months ago        960 B
 ```
-You have now downloaded your first docker image, it's a tiny Linux distribution named *alpine* optimised for docker.
+You have now downloaded your first Docker image, it's a tiny Linux distribution named *alpine* optimised for Docker.
 
 ### Running your first containers
-Now that we downloaded an image it's time to run some containers.  
+
+Now that we downloaded an image it's time to run some containers.
 Let's now run a Docker **container** based on this image. To do that you are going to use the `docker run` command.
 ```
 $ docker run alpine ls -l
@@ -37,7 +39,7 @@ drwxr-xr-x    5 root     root          4096 Mar  2 16:20 lib
 ......
 ......
 ```
-Behind the scenes, a lot of stuff happened. When you call `run` creates the container based on the image defined, *alpine* in this case, and then runs a command in that container (`ls -l`).  
+Behind the scenes, a lot of stuff happened. Calling `run` creates the container based on the image defined, *alpine* in this case, and then runs a command in that container (`ls -l`).  
 
 Let's try something else.
 ```
@@ -50,13 +52,14 @@ Ok now, let's try to run a shell in that container.
 ```
 $ docker run -i -t alpine sh
 ```
-Let's focus on two thing :
- * the `-i -t` is the use of options from the `run` command to keep open the input stream of our console in the container and allocate a pseudo terminal. It allow us to send command and see results of the shell in your container.
- * the shell you'r in is in the container. Try some commands like `hostname`, `ifconfig` to see that you don't see your machine informations.
+Let's focus on two things :
+ * the `-i -t` is the use of options from the `run` command to keep open the input stream of our console in the container and allocate a pseudo terminal. It allows us to send commands and see results of the shell in your container.
+ * the shell you're in is in the container. Try some commands like `hostname`, `ifconfig` to see that you don't see your machine information.
 
 When you want `exit` the shell.
 
 ### Run a container in the background
+
 You don't always have to run containers in the foreground.  
 When you want to run a database, for example, in a container, you want to launch it in the background.
 
@@ -65,12 +68,13 @@ Let's start a **MySQL** database.
 $ docker run -d -p 3300:3306 -e MYSQL_ROOT_PASSWORD=root mysql
 ```
 
-`-d` is the option that allow to detach the container from your shell.  
-`-p 3300:3306` is a port binding, it bind the port **3300** of your host to the port **3306** of the container.  
-`-e MYSQL_ROOT_PASSWORD=root` is the definition of the environment variable in **MYSQL_ROOT_PASSWORD** is the container (in this case to set the mysql root password).  
+`-d` is the option that allows to detach the container from your shell.  
+`-p 3300:3306` is a port binding, it binds the port **3300** of your host to the port **3306** of the container.  
+`-e MYSQL_ROOT_PASSWORD=root` is the definition of the environment variable **MYSQL_ROOT_PASSWORD** in the container (in this case to set the mysql root password).  
 Also note that the `pull` of the `mysql` image has been done automatically as the `mysql` image wasn't on your machine.
 
 ### Show running container
+
 Now you know how to run containers in the background, the right question is : *How the hell can I know what is running in a running container ?*
 
 ```
@@ -78,7 +82,7 @@ $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
 0f9efadd0778        mysql               "docker-entrypoint.sh"   2 seconds ago       Up 1 seconds        0.0.0.0:3300->3306/tcp   stoic_roentgen
 ```
-You can see your running **MySQL** container, it's status and also some minimal informations like the port binding and the uptime.
+You can see your running **MySQL** container, it's status and also some minimal information like the port binding and the uptime.
 
 Let's now add the option `-a` to the command.
 ```
@@ -89,8 +93,8 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 9e522f5e7b13        alpine              "echo 'hello from ..."   About a minute ago   Exited (0) About a minute ago                            dazzling_thompson
 d99dd89f3fca        alpine              "ls -l"                  About a minute ago   Exited (0) About a minute ago                            musing_curran
 ```
-We see all the containers launched durant this workshop.  
-But with the status exited for all the previous containers.
+We see all the containers launched during this workshop.  
+But with the status `Exited` for all the previous containers.
 
 Let's try to restart the container with the shell !
 ```
@@ -106,9 +110,10 @@ It's time to stop it again
 ```
 $ docker stop <container with sh command name|zen_pike here>
 ```
-We could also have `kill` it with the command `docker kill`. The kill is a more radical command that kill the process in the container, it should only be used when a stop isn't effective.
+We could also have `kill` it with the command `docker kill`. The kill is a more radical command that kills the process in the container, it should only be used when a stop isn't effective.
 
 ### Multiple container of image
+
 Now we have launched some containers, it's time to run multiple containers of the same image.  
 For the occasion we add an option of the `run` command to name the container
 ```
@@ -118,7 +123,7 @@ $ docker run -d -p 8001:80 --name whoami2 emilevauge/whoami
 43de1ad97a06a059c0292236309fea7f613527a48d0564422a473b6d71977644
 ```
 
-Try to acces to the apps to see the differents informations for each container.
+Try to access the apps to see the different information for each container.
 ![display_whoami](./whoami.gif)
 
 We can also check the running containers with a `docker ps`
@@ -132,7 +137,7 @@ Stop the containers and go to the [exercise section](#Exercise)
 
 ## Clean the containers
 As you can see when running a `docker ps -a`, when a container stop or exit normally, it's not destroyed.  
-It allow us to relaunch this container but while it's not running it still keep some space on your host. To delete these stopped containers you have to run `docker rm <container id>`.
+It allows us to relaunch this container but while it's not running it still keeps some space on your host. To delete these stopped containers you have to run `docker rm <container id>`.
 ```
 $ docker stop whoami1
 $ docker rm whoami1
@@ -159,12 +164,12 @@ Total reclaimed space: 1.351 kB
 
 ## Recap
  * `pull` : Download a docker image from a registry
- * `run`: Start a new container based on a image
+ * `run`: Start a new container based on an image
  * `ps`: Show containers
  * `images`: List images available on the system
- * `start`: Start a existing container
- * `stop`: Stop a existing running container
- * `kill`: Kill a existing running container
+ * `start`: Start an existing container
+ * `stop`: Stop an existing running container
+ * `kill`: Kill an existing running container
  * `rm` : Delete a container from the system
 
 ## Exercise
