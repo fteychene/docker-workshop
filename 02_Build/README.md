@@ -7,7 +7,8 @@ We will compile a web application, run it on our desk and push it to a docker re
 ## Steps
 
 ### Dive in the image (source [docker-labs](https://github.com/docker-training/labs/blob/master/beginner/chapters/webapps.md))
-Docker images are the basis of containers. In the previous example, you pulled some images from the registry and asked the Docker client to run a container based on that image. To see the list of images that are available locally on your system, run the docker images command.
+
+Docker images are the basis of containers. In the previous example, you pulled some images from the registry and asked the Docker client to run a container based on that image. To see the list of images that are available locally on your system, run the `docker images` command.
 ```
 $ docker images
 REPOSITORY             TAG                 IMAGE ID            CREATED             SIZE
@@ -30,13 +31,13 @@ For example you could pull a specific version of ubuntu image as follows:
 ```
 $ docker pull ubuntu:12.04
 ```
-If you do not specify the version number of the image then, as mentioned, the Docker client will default to a version named latest.
+If you do not specify the version number of the image, then, as mentioned, the Docker client will default to a version named latest.
 
-So for example, the docker pull command given below will pull an image named `ubuntu:latest`:
+So for example, the `docker pull` command given below will pull an image named `ubuntu:latest`:
 ```
 $ docker pull ubuntu
 ```
-To get a new Docker image you can either get it from a registry (such as the Docker Hub) or create your own. There are hundreds of thousands of images available on Docker hub. You can also search for images directly from the command line using docker search.
+To get a new Docker image you can either get it from a registry (such as the Docker Hub) or create your own. There are hundreds of thousands of images available on Docker hub. You can also search for images directly from the command line using `docker search`.
 
 An important distinction with regard to images is between base images and child images.
 
@@ -45,19 +46,19 @@ An important distinction with regard to images is between base images and child 
 
 Another key concept is the idea of official images and user images. (Both of which can be base images or child images.)
 
- * Official images are Docker sanctioned images. Docker, Inc. sponsors a dedicated team that is responsible for reviewing and publishing all Official Repositories content. This team works in collaboration with upstream software maintainers, security experts, and the broader Docker community. These are not prefixed by an organization or user name. In the list of images above, the `python`, `node`, `alpine` and `nginx` images are official (base) images. To find out more about them, check out the Official Images Documentation.
+ * Official images are Docker sanctioned images. Docker, Inc. sponsors a dedicated team that is responsible for reviewing and publishing all Official Repositories content. This team works in collaboration with upstream software maintainers, security experts, and the broader Docker community. These are not prefixed by an organization or user name. In the list of images above, the `python`, `node`, `alpine` and `nginx` images are official (base) images. To find out more about them, check out the [Official Images Documentation](https://docs.docker.com/docker-hub/official_repos/).
  * User images are images created and shared by users like you. They build on base images and add additional functionality. Typically these are formatted as user/image-name. The user value in the image name is your Docker Hub user or organization name.
 
 
 ## How to build an image
-To build a docker image we use a [`Dockerfile`](https://docs.docker.com/engine/reference/builder/) that describe all the step from a base image to reach the desired state and provide all the needed informations to use it.
+To build a docker image we use a [`Dockerfile`](https://docs.docker.com/engine/reference/builder/) that describes all the steps from a base image to reach the desired state and provide all the needed information to use it.
 
 Here's a quick summary of the few basic commands we used in our Dockerfile.
 
- * `FROM` starts the Dockerfile. It is a requirement that the Dockerfile must start with the `FROM` command. Images are created in layers, which means you can use another image as the base image for your own. The `FROM` command defines your base layer. As arguments, it takes the name of the image. Optionally, you can add the Docker Hub username of the maintainer and image version, in the format `username/imagename:version`.
+ * `FROM` starts the Dockerfile. It is a requirement that the Dockerfile starts with the `FROM` command. Images are created in layers, which means you can use another image as the base image for your own. The `FROM` command defines your base layer. As arguments, it takes the name of the image. Optionally, you can add the Docker Hub username of the maintainer and image version, in the format `username/imagename:version`.
  * `RUN` is used to build up the Image you're creating. For each `RUN` command, Docker will run the command then create a new layer of the image. This way you can roll back your image to previous states easily. The syntax for a `RUN` instruction is to place the full text of the shell command after the RUN (e.g., `RUN mkdir /user/local/foo`). This will automatically run in a `/bin/sh` shell. You can define a different shell like this: `RUN /bin/bash -c 'mkdir /user/local/foo'`
  * `COPY` copies local files into the container.
- * `CMD` defines the commands that will run on the Image at start-up. Unlike a RUN, this does not create a new layer for the Image, but simply runs the command. There can only be one `CMD` per a Dockerfile/Image. If you need to run multiple commands, the best way to do that is to have the `CMD` run a script. `CMD` requires that you tell it where to run the command, unlike `RUN`. So example `CMD` commands would be:
+ * `CMD` defines the commands that will run on the Image at start-up. Unlike a RUN, this does not create a new layer for the Image, but simply runs the command. There can only be one `CMD` per Dockerfile/Image. If you need to run multiple commands, the best way to do that is to have the `CMD` run a script. `CMD` requires that you tell it where to run the command, unlike `RUN`. So example `CMD` commands would be:
  ```
   CMD ["python", "./app.py"]
 
@@ -66,7 +67,8 @@ Here's a quick summary of the few basic commands we used in our Dockerfile.
  * `EXPOSE` opens ports in your image to allow communication to the outside world when it runs in a container.
 
 ### Build your first image
-We're going to build a static website served by a nginx server. The important thing to understand is that we will build a docker image that containers all the library needed to serve our static website, that means all the page but also the webserver to respond to http requests.  
+
+We're going to build a static website served by a nginx server. The important thing to understand is that we will build a docker image that contains all the libraries needed to serve our static website, that means all the pages but also the webserver to respond to HTTP requests.
 To build this project we have to build this [`Dockerfile`](./staticsite/Dockerfile)
 ```dockerfile
 # Define the base image to extend (in this case a nginx webserver on a alpine distribution)
@@ -77,7 +79,7 @@ RUN echo 'Hi, I am in your container' \
     > /usr/share/nginx/html/index.html
 ```
 
-To build the image you just have to add a Docker file oin a folder and launch the `docker build` command.
+To build the image you just have to add a Docker file in a folder and launch the `docker build` command.
 ```
 $ vi Dockerfile # edit the Dockerfile or download it from this repository
 $ docker build -t local/staticwebsite .
@@ -90,11 +92,12 @@ Step 2/2 : RUN echo 'Hi, I am in your container'     > /usr/share/nginx/html/ind
 Removing intermediate container b2c1552849a2
 Successfully built d3f37b380143
 ```
-This command launch a build in docker in the current directory (by defining `.` as parameter) and `-t local/staticwebsite` tag the generated image with the name **local/staticwebsite**.  
+This command launches a build in docker in the current directory (by defining `.` as parameter) and `-t local/staticwebsite` tags the generated image with the name **local/staticwebsite**.  
 
 You can now launch your generated website with `docker run -p 8000:80 -d local/staticwebsite`.
 
 ### A more complex image
+
 Now we've seen how to build a simple image, we're going to build a more complex one.  
 For example a React front-end available in the [reactapp](./reactapp) folder.
 
@@ -144,12 +147,13 @@ Step 8/8 : CMD npm start
 Removing intermediate container 7fa5345e715e
 Successfully built 7f768905ebed
 ```
-The application wan now be run in a container by doing `docker run -p <port>:3000 local/reactapp`.  
+The application will now be run in a container by doing `docker run -p <port>:3000 local/reactapp`.  
 We have created a container with a `node` installed and we injected our application to be launched inside. With the node included in the container, everybody with a docker on his machine can run your app.
 
 ### Push an image on a registry
+
 Now we have build our own image, let's see how to push it and make it available.  
-the most common way is to use the [DockerHub](https://hub.docker.com/) registry of Docker Inc but for our case we will launch a registry on your machine because it's a docker container :)
+The most common way is to use the [DockerHub](https://hub.docker.com/) registry of Docker Inc but for our case we will launch a registry on your machine because it's a docker container :)
 
 Let's start the `registry`:
 ```
